@@ -24,6 +24,7 @@ phrack -h will give you help
 -p : proxy set 
 -n : from network , <code>default from local</code> 
 -u : update to loc , this options just work within “-n”
+-s : search key word 
 
 ## example 
 
