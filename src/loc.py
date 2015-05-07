@@ -1,4 +1,5 @@
 from .config import LOCAL_DIR
+from .config import cmd_templates
 
 import os
 
@@ -34,3 +35,10 @@ def read_text(*paths):
             return fp.read()
     except FileNotFoundError as e :
         print ("no loc file , you should try '-n' options  ")
+
+def search(key_words):
+    cmd = cmd_templates["search"]
+    real_cmd = cmd %(key_words)
+    print ("search : ",key_words ,end="\n\n")
+    print (os.popen(real_cmd).read())
+

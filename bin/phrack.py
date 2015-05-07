@@ -8,6 +8,7 @@ from phrack import phrack_paraser
 
 from phrack import proxy_set
 from phrack import check
+from phrack import search
 
 def parser():
     desc ="""
@@ -20,6 +21,8 @@ def parser():
     parser.add_argument('-ii','--introduction-issus',default=None)
     parser.add_argument('-d','--dirs',default=None)
     parser.add_argument('-p','--proxy',default=None)
+
+    parser.add_argument('-s','--search',default=None)
 
     args = parser.parse_args()
     return args
@@ -50,3 +53,6 @@ if __name__ == "__main__":
     elif args.dirs:
 
         print (get_content_dir(args.dirs,loc=args.network,update=args.upgrade))
+
+    elif args.search:
+        search(args.search.strip())
