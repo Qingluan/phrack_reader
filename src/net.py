@@ -1,6 +1,7 @@
-from .config import INDEX_FILE
 from .config import BASE_URL
 from .config import LOCAL_DIR
+from .config import reg_templates
+from .config import cmd_templates
 
 import  urllib.request as ur
 import re
@@ -51,16 +52,17 @@ class phrack_paraser (HTMLParser):
         return self.result
 
 def  get_dir(data):
-    cp = re.compile(r'(\d+?)/')
+    cp = re.compile(reg_templates['get_dir'])
     res =  cp.findall(data)
     if res : return res[0]
 
 def get_date(data):
-    cp = re.compile(r'(\d{1,2}\-\w{3}\-\d{4}\s\d{2}\:\d{2})\s')
+    #cp = re.compile(r'(\d{1,2}\-\w{3}\-\d{4}\s\d{2}\:\d{2})\s')
+    cp = re.compile(reg_templates['get_date'])
     return cp.findall(data)
 
 def get_content(data):
-    cp = re.compile(r'(\d+?\.txt)')
+    cp = re.compile(reg_templates['get_content_name'])
     return cp.findall(data)
 
 def summary(data,date):
@@ -70,7 +72,7 @@ def get_index(loc=True,update=False):
     print (loc,update)
     if loc :#and os.path.exists(INDEX_FILE):
 #        return get_content_dir("",loc=True,update=False) 
-        os.system("tree {}".format(LOCAL_DIR))
+        os.system(cmd_templates['index'])
     else:
  
         data = _get('').read().decode()
